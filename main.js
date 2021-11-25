@@ -1,6 +1,16 @@
+let cnv;
+let cnx;
 function poNacteni() {
-    let cnv = document.getElementById("platno");
-    let ctx = cnv.getContext("2d");
+    cnv = document.getElementById("platno");
+    ctx = cnv.getContext("2d");
+
+    setInterval(animace, 100);
+}
+let kruhX = 320;
+let kruhY = 200;
+function animace() {
+    //vycisteni platna
+    ctx.clearRect(0,0,cnv.width,cnv.height);
 
     //rovne cary
     ctx.beginPath();
@@ -25,5 +35,13 @@ function poNacteni() {
     ctx.strokeStyle = "blue";
     ctx.arc(250, 200, 30, 0, 2*Math.PI);
     ctx.stroke();
+
+    //kruh (plny)
+    kruhX = kruhX -2;
+    kruhY = kruhY -1;
+    ctx.beginPath();
+    ctx.fillStyle = "magenta";
+    ctx.arc(kruhX, kruhY, 30, 0, 2*Math.PI);
+    ctx.fill();
 
 }
