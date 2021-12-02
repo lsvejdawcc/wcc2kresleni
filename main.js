@@ -2,12 +2,25 @@ let cnv;
 let cnx;
 let obrazek = new Image();
 obrazek.src = "mimon.png";
+function stiskKlavesyDolu(udalost) {
+    console.log(udalost.key);
+    if (udalost.key == "w") {
+        obdY = obdY -10;
+    }
+    if (udalost.key == "s") {
+        obdY = obdY +10;
+    }
+}
 function poNacteni() {
+    document.addEventListener("keydown", stiskKlavesyDolu);
+
     cnv = document.getElementById("platno");
     ctx = cnv.getContext("2d");
 
     setInterval(animace, 100);
 }
+let obdX = 20;
+let obdY = 200;
 let kruhX = 320;
 let kruhY = 200;
 let obrazekUhel = 0;
@@ -29,7 +42,7 @@ function animace() {
     ctx.beginPath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = "green";
-    ctx.rect(20, 200, 80, 40);
+    ctx.rect(obdX, obdY, 80, 40);
     ctx.stroke();
 
     //kruznice
