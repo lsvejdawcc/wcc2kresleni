@@ -23,6 +23,8 @@ let obdX = 20;
 let obdY = 200;
 let kruhX = 320;
 let kruhY = 200;
+let kruhRychlostX = -5;
+let kruhRychlostY = -1;
 let obrazekUhel = 0;
 function animace() {
     //vycisteni platna
@@ -53,8 +55,11 @@ function animace() {
     ctx.stroke();
 
     //kruh (plny)
-    kruhX = kruhX -2;
-    kruhY = kruhY -1;
+    kruhX = kruhX + kruhRychlostX;
+    kruhY = kruhY + kruhRychlostY;
+    if (kruhX < 30) { //stred kruhu je v mensi vzdalenosti nez jeho polomer
+        kruhRychlostX = -1 * kruhRychlostX;
+    }
     ctx.beginPath();
     ctx.fillStyle = "magenta";
     ctx.arc(kruhX, kruhY, 30, 0, 2*Math.PI);
