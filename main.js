@@ -1,5 +1,7 @@
 let cnv;
 let cnx;
+let obrazek = new Image();
+obrazek.src = "mimon.png";
 function poNacteni() {
     cnv = document.getElementById("platno");
     ctx = cnv.getContext("2d");
@@ -8,6 +10,7 @@ function poNacteni() {
 }
 let kruhX = 320;
 let kruhY = 200;
+let obrazekUhel = 0;
 function animace() {
     //vycisteni platna
     ctx.clearRect(0,0,cnv.width,cnv.height);
@@ -44,4 +47,11 @@ function animace() {
     ctx.arc(kruhX, kruhY, 30, 0, 2*Math.PI);
     ctx.fill();
 
+    //obrazek
+    obrazekUhel = obrazekUhel + 10; //otaceni obrazku
+    ctx.save();
+    ctx.translate(250, 50); //posunuti stredu otaceni resp. souradnic x=0,y=0 na novou pozici
+    ctx.rotate(obrazekUhel/360 * 2*Math.PI);
+    ctx.drawImage(obrazek, -30, -30, 60, 60); //na pozici posunute doleva o polovinu sirky a nahoru o polovinu vysky
+    ctx.restore();
 }
