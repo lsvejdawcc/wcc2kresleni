@@ -17,10 +17,11 @@ function poNacteni() {
     cnv = document.getElementById("platno");
     ctx = cnv.getContext("2d");
 
-    setInterval(animace, 100);
+    setInterval(animace, 30);
 }
 let obdX = 20;
 let obdY = 200;
+const KRUH_POLOMER = 30;
 let kruhX = 320;
 let kruhY = 200;
 let kruhRychlostX = -5;
@@ -57,12 +58,21 @@ function animace() {
     //kruh (plny)
     kruhX = kruhX + kruhRychlostX;
     kruhY = kruhY + kruhRychlostY;
-    if (kruhX < 30) { //stred kruhu je v mensi vzdalenosti nez jeho polomer
+    if (kruhX < KRUH_POLOMER) { //stred kruhu je v mensi vzdalenosti nez jeho polomer
         kruhRychlostX = -1 * kruhRychlostX;
+    }
+    if (kruhX > cnv.width - KRUH_POLOMER) { //stred kruhu je v mensi vzdalenosti nez jeho polomer
+        kruhRychlostX = -1 * kruhRychlostX;
+    }
+    if (kruhY < KRUH_POLOMER) { //stred kruhu je v mensi vzdalenosti nez jeho polomer
+        kruhRychlostY = -1 * kruhRychlostY;
+    }
+    if (kruhY > cnv.height - KRUH_POLOMER) { //stred kruhu je v mensi vzdalenosti nez jeho polomer
+        kruhRychlostY = -1 * kruhRychlostY;
     }
     ctx.beginPath();
     ctx.fillStyle = "magenta";
-    ctx.arc(kruhX, kruhY, 30, 0, 2*Math.PI);
+    ctx.arc(kruhX, kruhY, KRUH_POLOMER, 0, 2*Math.PI);
     ctx.fill();
 
     //obrazek
