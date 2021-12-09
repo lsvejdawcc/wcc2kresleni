@@ -2,17 +2,27 @@ let cnv;
 let cnx;
 let obrazek = new Image();
 obrazek.src = "mimon.png";
-function stiskKlavesyDolu(udalost) {
-    console.log(udalost.key);
+let hrac1nahoru = false;
+let hrac1dolu = false;
+function stiskKlavesy(udalost) {
     if (udalost.key == "w") {
-        obdY = obdY -10;
+        hrac1nahoru = true;
     }
     if (udalost.key == "s") {
-        obdY = obdY +10;
+        hrac1dolu = true;
+    }
+}
+function uvolneniKlavesy(udalost) {
+    if (udalost.key == "w") {
+        hrac1nahoru = false;
+    }
+    if (udalost.key == "s") {
+        hrac1dolu = false;
     }
 }
 function poNacteni() {
-    document.addEventListener("keydown", stiskKlavesyDolu);
+    document.addEventListener("keydown", stiskKlavesy);
+    document.addEventListener("keyup", uvolneniKlavesy);
 
     cnv = document.getElementById("platno");
     ctx = cnv.getContext("2d");
@@ -42,6 +52,12 @@ function animace() {
     ctx.stroke();
 
     //obdelnik
+    if (hrac1nahoru) {
+        obdY = obdY -4;
+    }
+    if (hrac1dolu) {
+        obdY = obdY +4;
+    }
     ctx.beginPath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = "green";
